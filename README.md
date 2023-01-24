@@ -4,37 +4,40 @@
 Social d’artista - BeArts
 
 
-Panoramica
+                                                                                                        
+"L’arte non è ciò che si vede, ma ciò che consenti agli altri di vedere." (Edgar Degas)
 
-L’applicazione è un social dedicato agli artisti, di qualunque tipo, e darà la possibilità di creare una rete di conoscenze e followers per la condivisione delle proprie creazioni.
+Nell'era dei social network sono numerosi i target di riferimento, e gli artisti non sono da meno. Lo scopo principale della mia idea è quella di sviluppare un social media che metta in contatto artisti di ogni genere, dal chitarrista al pittore, dallo scultore al digital designer, offrendogli una vetrina dedicata principalmente a contenuti di tipo culturale e artistico, vetrina nella quale potranno consentire agli altri di ammirare l'arte.
 
 
-Obiettivi
+Funzionalità:
 
-Social network SPA che colleghi tra di loro gli artisti e gli amanti dell’arte 
+ ° Social network SPA che colleghi tra di loro gli artisti e gli amanti dell’arte 
 
-Creazione di contenuti a tema(post)
+ ° Creazione di contenuti a tema(post)
 
-Messaggistica e following
+ ° Messaggistica e following
 
-Ricerca parametrica
+ ° Ricerca parametrica
 
-Condivisione e salvataggio post
+ ° Condivisione e salvataggio post
 
 
 Specifiche:
 
-Sistema di autenticazione
+ • Sistema di autenticazione
 
-Creazione di profili utenti | lista di amici
+ • Creazione di profili utenti | lista di amici
 
-Creazione di contenuti, post, articoli, opere 
+ • Creazione di contenuti, post, articoli
 
-Sistema di messaggistica istantanea 
+ • Upload di immagini e video
 
-Ricerca parametrica(per utente e per tag post)
+ • Sistema di messaggistica istantanea 
 
-Like, following, share
+ • Ricerca parametrica(per utente e per definizioni)
+
+ • Like, following, share
 
 
 Specifiche tecniche:
@@ -44,6 +47,9 @@ Angular CLI
 API Rest [API Graph: https://developers.facebook.com/docs/graph-api/overview]
 
 APP Responsive
+
+Build and deploy su Firebase
+
 
 
 
