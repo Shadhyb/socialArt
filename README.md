@@ -26,7 +26,7 @@ Specifiche:
 
 Sistema di autenticazione [Firebase]
 
-API Rest [mockapi]
+API Rest [API Graph]
 
 Creazione di profili utenti | lista di amici
 
