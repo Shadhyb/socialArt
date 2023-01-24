@@ -24,9 +24,7 @@ Condivisione e salvataggio post
 
 Specifiche:
 
-Sistema di autenticazione [Firebase]
-
-API Rest [API Graph]
+Sistema di autenticazione
 
 Creazione di profili utenti | lista di amici
 
@@ -37,5 +35,17 @@ Sistema di messaggistica istantanea
 Ricerca parametrica(per utente e per tag post)
 
 Like, following, share
+
+
+Specifiche tecniche:
+
+Angular CLI
+
+API Rest [API Graph: https://developers.facebook.com/docs/graph-api/overview]
+
+APP Responsive
+
+
+
 
 
