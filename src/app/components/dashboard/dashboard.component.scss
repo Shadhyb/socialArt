@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+div{
+  background: #303030;
+  color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.container{
+  height: 100vh;
+  width: 100%;
+}
+h1{
+  color:greenyellow;
+  font-family: 'Shadows Into Light', cursive;
+
+}
+button{
+  background-color: #E91E63;
+  border: none;
+}
+button:hover{
+  background-color:#E91E63;
+  color:greenyellow}
+
+//sfondo con svg??

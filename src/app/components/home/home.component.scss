@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+
+:host {
+  text-align: center;
+}
+button{
+  font-family: 'Shadows Into Light', cursive;
+  color: greenyellow;
+  font-size: xx-large;
+  background: none;
+  border:none;
+}
+
+nz-header,
+nz-footer {
+  background: #E91E63;
+  color: #fff;
+}
+
+nz-footer {
+  line-height: 1.5;
+}
+
+nz-sider {
+  background: #ee0150d3;
+  color: #fff;
+  line-height: 120px;
+
+}
+
+nz-content {
+  background: #303030;
+  color: #fff;
+  min-height: 120px;
+  line-height: 120px;
+  height: 100vh;
+}
+
+nz-layout {
+  margin-bottom: 48px;
+}
+
+nz-layout nz-layout,
+nz-layout:last-child {
+  margin: 0;
+}
