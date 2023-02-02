@@ -1,60 +1,27 @@
-# socialArt
- 
+# App
 
-Social d’artista - BeArts
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.10.
 
+## Development server
 
-                                                                                                        
-"L’arte non è ciò che si vede, ma ciò che consenti agli altri di vedere." (Edgar Degas)
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-Nell'era dei social network sono numerosi i target di riferimento, e gli artisti non sono da meno. Lo scopo principale della mia idea è quella di sviluppare un social media che metta in contatto artisti di ogni genere, dal chitarrista al pittore, dallo scultore al digital designer, offrendogli una vetrina dedicata principalmente a contenuti di tipo culturale e artistico, vetrina nella quale potranno consentire agli altri di ammirare l'arte.
+## Code scaffolding
 
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
+## Build
 
-Attraverso la piattaforma l'utente potrà:
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
- ° Creare un proprio profilo utente con le necessarie informazioni di contatto 
- 
- ° Creare post a tema, contenuti, articoli 
+## Running unit tests
 
- ° Utilizzare un servizio di messaggistica
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
- ° Effettuare ricerche per nome utente 
+## Running end-to-end tests
 
- ° Condividere post
- 
- ° Controllare la piattaforma anche su web mobile
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
+## Further help
 
-Specifiche:
-
- • Sistema di autenticazione con token
-
- • Creazione di profili utenti | lista di amici
-
- • Creazione di contenuti, post, articoli
-
- • Upload di immagini e video
-
- • Sistema di messaggistica istantanea 
-
- • Ricerca parametrica(per utente e per definizioni)
-
- • Like, following, share
-
-
-Specifiche tecniche:
-
-Angular CLI
-
-API Rest [API Graph: https://developers.facebook.com/docs/graph-api/overview]
-
-APP Responsive
-
-Build and deploy su Firebase
-
-
-
-
-
-
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
