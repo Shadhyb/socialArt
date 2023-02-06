@@ -12,7 +12,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
   }
   submit(){
-    this.router.navigate(['/home'])
+    this.router.navigate(['/signup'])
   }
 
 }

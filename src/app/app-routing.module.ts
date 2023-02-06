@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
-import { SignupComponent } from './components/auth/signup/signup.component';
+import { NzDemoFormRegisterComponent} from './components/auth/signup/signup.component';
+import { NzDemoFormNormalLoginComponent } from './components/auth/login/login.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,11 @@ const routes: Routes = [
   },
   {
     path:'signup',
-    component: SignupComponent
+    component: NzDemoFormRegisterComponent
+  },
+  {
+    path:'login',
+    component: NzDemoFormNormalLoginComponent
   }
 ];
 

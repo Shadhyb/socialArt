@@ -3,7 +3,7 @@ import { initializeApp } from 'firebase/app';
 import { child, get, getDatabase, onValue, push, ref, set } from "firebase/database";
 import { environment } from 'src/environments/environment';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
 export class FirebaseDbService {
   app = initializeApp(environment.firebaseConfig);
