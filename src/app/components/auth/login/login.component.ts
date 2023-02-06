@@ -56,9 +56,12 @@ import { FirebaseDbService } from 'src/app/services/firebase-db.service';
         justify-content: center;
         align-items: center;
       }
+      span{
+        white-space: nowrap;
+      }
 
       .login-form {
-
+        padding:20px;
         border:1px solid black;
         border-radius: 10px;
         background:#fff;
@@ -81,7 +84,11 @@ import { FirebaseDbService } from 'src/app/services/firebase-db.service';
         color: #E91E63;
         border: none;
         cursor: pointer;
+
       }
+      .login-form-button:hover{
+          background-color:#E91E63;
+        color:greenyellow}
     `
   ]
 })

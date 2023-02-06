@@ -14,7 +14,7 @@ import { NzDemoFormNormalLoginComponent } from './components/auth/login/login.co
 
 import { CardComponent } from './components/card/card.component';
 import { AuthModule } from './components/auth/auth/auth.module';
-import { HomeComponent } from './components/home/home.component';
+import { NzDemoLayoutTopComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NzDemoFormRegisterComponent } from './components/auth/signup/signup.component';
 
@@ -27,6 +27,14 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
+
+
 registerLocaleData(en);
 
 @NgModule({
@@ -34,7 +42,7 @@ registerLocaleData(en);
     AppComponent,
     NzDemoFormNormalLoginComponent,
     CardComponent,
-    HomeComponent,
+    NzDemoLayoutTopComponent,
     NzDemoFormRegisterComponent,
     DashboardComponent
   ],
@@ -51,8 +59,13 @@ registerLocaleData(en);
     NzGridModule,
     NzInputModule,
     NzSelectModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
+    NzCheckboxModule,
+    NzIconModule,
+    NzBreadCrumbModule,
+    NzAvatarModule,
+    NzBadgeModule,
+    NzPopoverModule,
 
   ],
   providers: [
