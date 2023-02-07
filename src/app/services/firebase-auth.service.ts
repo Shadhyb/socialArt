@@ -35,13 +35,13 @@ export class FirebaseAuthService {
     email: string,
     password: string,
     displayName: string,
-    photoURL: string
+
   ) {
     return createUserWithEmailAndPassword(this.auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         return updateProfile(user, {
-            displayName:displayName, photoURL: photoURL
+            displayName:displayName,
         }).then(()=> {
           this.logIn({'email': email, 'password': password});
           return user;
@@ -65,11 +65,10 @@ export class FirebaseAuthService {
             displayName: user.displayName,
             email: user.email,
             uid: user.uid,
-            photoURL: user.photoURL,
           })
         );
         this.authSubject.next(user);
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
       })
       .catch((error) => {
         const errorCode = error.code;

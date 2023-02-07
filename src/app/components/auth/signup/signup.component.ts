@@ -11,6 +11,7 @@ import { Observable, Observer } from 'rxjs';
 import { FirebaseDbService } from 'src/app/services/firebase-db.service';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { FormBuilder } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'nz-demo-form-register',
@@ -64,6 +65,9 @@ import { FormBuilder } from '@angular/forms';
           <input nz-input id="nickname" formControlName="nickname" />
         </nz-form-control>
       </nz-form-item>
+      <nz-form-item>
+        <p>oppure <span><a routerLink="/login">Accedi</a></span></p>
+      </nz-form-item>
 
       <nz-form-item nz-row class="register-area">
         <nz-form-control [nzSpan]="14" [nzOffset]="6">
@@ -84,7 +88,10 @@ styles: [
         background: #303030;
       }
 
-
+      a{
+        color:#E91E63;
+        cursor:pointer
+      }
 
 
 
@@ -151,9 +158,37 @@ export class NzDemoFormRegisterComponent implements OnInit {
           control.markAsDirty();
           control.updateValueAndValidity({ onlySelf: true });
         }
+
       });
     }
+    let data = {
+      email: this.validateForm.value.email,
+      password: this.validateForm.value.password,
+      name: this.validateForm.value.userName,
+    };
+    this.fbA
+      .signUp(data.email, data.password, data.name)
+      .then((user: any) =>{
+        console.log(user);
+        this.fDb.post(user.uid, data.name, data.email)
+      }
+      )
+      .then(() =>
+        this.fbA.logIn({ email: data.email, password: data.password })
+      );
   }
+  userNameAsyncValidator = (control: UntypedFormControl) =>
+  new Observable((observer: Observer<ValidationErrors | null>) => {
+    setTimeout(() => {
+      if (control.value === 'JasonWood') {
+        // you have to return `{error: true}` to mark it as an error event
+        observer.next({ error: true, duplicated: true });
+      } else {
+        observer.next(null);
+      }
+      observer.complete();
+    }, 1000);
+  });
 
   updateConfirmValidator(): void {
     /** wait for refresh value */
@@ -169,11 +204,9 @@ export class NzDemoFormRegisterComponent implements OnInit {
     return {};
   };
 
-  getCaptcha(e: MouseEvent): void {
-    e.preventDefault();
-  }
 
-  constructor(private fb: UntypedFormBuilder) { }
+
+  constructor(private fb: UntypedFormBuilder, private fbA:FirebaseAuthService, private fDb: FirebaseDbService) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -183,4 +216,5 @@ export class NzDemoFormRegisterComponent implements OnInit {
       nickname: [null, [Validators.required]],
     });
   }
+
 }

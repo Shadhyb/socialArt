@@ -19,6 +19,13 @@ import { FirebaseDbService } from 'src/app/services/firebase-db.service';
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your email!">
+          <nz-input-group nzPrefixIcon="mail">
+            <input type="email" nz-input formControlName="email" placeholder="Email" />
+          </nz-input-group>
+        </nz-form-control>
+        </nz-form-item>
+      <nz-form-item>
         <nz-form-control nzErrorTip="Please input your Password!">
           <nz-input-group nzPrefixIcon="lock">
             <input type="password" nz-input formControlName="password" placeholder="Password" />
@@ -37,7 +44,7 @@ import { FirebaseDbService } from 'src/app/services/firebase-db.service';
       </div>
       <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" nzShape="round">Log in</button>
       Or
-      <a>register now!</a>
+      <a routerLink="/signup">register now!</a>
     </form>
   </div>
   </div>
@@ -58,6 +65,9 @@ import { FirebaseDbService } from 'src/app/services/firebase-db.service';
       }
       span{
         white-space: nowrap;
+      }
+      a{
+        color:#E91E63;
       }
 
       .login-form {
@@ -98,6 +108,7 @@ export class NzDemoFormNormalLoginComponent implements OnInit {
   submitForm(): void {
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
+      this.fbA.logIn(this.validateForm.value);
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
@@ -108,12 +119,13 @@ export class NzDemoFormNormalLoginComponent implements OnInit {
     }
   }
 
-  constructor(private fb: UntypedFormBuilder) {}
+  constructor(private fb: UntypedFormBuilder, private fbA:FirebaseAuthService, private fDb:FirebaseDbService) {}
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       userName: [null, [Validators.required]],
       password: [null, [Validators.required]],
+      email: [null, [Validators.required]],
       remember: [true]
     });
   }

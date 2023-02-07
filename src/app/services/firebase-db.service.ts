@@ -26,11 +26,10 @@ export class FirebaseDbService {
     });
 
 }
-post(userId: string, name:string, email:string, imageUrl:string){
+post(userId: string, name:string, email:string){
     const a = ref(this.database, 'users/' + userId)
     set(a, {
       email: email,
-      profile_picture: imageUrl,
       username: name,
     }).catch((error) => {
       const errorCode = error.code;

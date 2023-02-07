@@ -33,6 +33,9 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { ProfileComponent } from './components/profile/profile.component';
+import { MailComponent } from './components/mail/mail.component';
+import { NotificationComponent } from './components/notification/notification.component';
 
 
 registerLocaleData(en);
@@ -44,7 +47,10 @@ registerLocaleData(en);
     CardComponent,
     NzDemoLayoutTopComponent,
     NzDemoFormRegisterComponent,
-    DashboardComponent
+    DashboardComponent,
+    ProfileComponent,
+    MailComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
