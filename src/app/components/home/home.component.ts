@@ -1,4 +1,10 @@
 import { Component } from '@angular/core';
+import { UntypedFormBuilder } from '@angular/forms';
+import { FacebookAuthProvider, UserCredential } from 'firebase/auth';
+import { FirebaseAuthService } from 'src/app/services/firebase-auth.service';
+import { FirebaseDbService } from 'src/app/services/firebase-db.service';
+import { getAuth } from "firebase/auth";
+
 
 @Component({
   selector: 'nz-demo-layout-top',
@@ -31,6 +37,7 @@ import { Component } from '@angular/core';
               nz-popover
               [nzPopoverContent]="message"
               nzPopoverPlacement="bottomRight"
+              routerLink="messages"
             ></a>
           </li>
           <li nz-menu-item>
@@ -41,19 +48,27 @@ import { Component } from '@angular/core';
               nz-popover
               [nzPopoverContent]="notification"
               nzPopoverPlacement="bottomLeft"
+              [routerLink]="'../notifications'"
             ></a>
+          </li>
+          <li>
+            <button>Esci</button>
           </li>
         </ul>
       </nz-header>
       <nz-content>
-        <div class="inner-content">Content</div>
+        <div class="inner-content">
+          <h3>Ciao</h3>
+          <span>{{nameView()}}</span>
+        </div>
       </nz-content>
       <nz-footer><h1>BeArts</h1>
       <p>be parts of arts</p>
     </nz-footer>
-    </nz-layout>
-    <ng-template #message>Messaggi</ng-template>
-    <ng-template #notification>Notifiche</ng-template>
+  </nz-layout>
+  <ng-template #message>Messaggi</ng-template>
+  <ng-template #notification>Notifiche</ng-template>
+  <ng-template #cards></ng-template>
   `,
   styles: [
     `
@@ -69,6 +84,13 @@ import { Component } from '@angular/core';
       h1 {
         color: greenyellow;
         font-family: 'Shadows Into Light', cursive;
+      }
+      h3{
+        color:#fff;
+        span{
+          font-family: 'Shadows Into Light', cursive;
+          color:greenyellow;
+        }
       }
       p{
        color:aqua;
@@ -121,6 +143,7 @@ import { Component } from '@angular/core';
 
       nz-content {
         padding: 0 50px;
+
       }
 
       nz-footer {
@@ -128,9 +151,12 @@ import { Component } from '@angular/core';
       }
 
       .inner-content {
-        background: #fff;
+        background: #4c4c4c;
+        color: #fff;
         padding: 24px;
         min-height: 280px;
+        height:100vh;
+
       }
       button {
         background-color: #e91e63;
@@ -143,4 +169,22 @@ import { Component } from '@angular/core';
     `,
   ],
 })
-export class NzDemoLayoutTopComponent {}
+export class NzDemoLayoutTopComponent {
+
+
+
+  constructor(private fbA:FirebaseAuthService){
+
+}
+
+nameView(){
+  const auth = getAuth();
+  const user = auth.currentUser;
+  let userName = auth.currentUser?.displayName;
+
+
+
+}
+
+}
+

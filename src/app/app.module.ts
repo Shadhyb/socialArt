@@ -12,11 +12,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NzDemoFormNormalLoginComponent } from './components/auth/login/login.component';
 
-import { CardComponent } from './components/card/card.component';
+import { NzDemoCardMetaComponent} from './components/card/card.component';
 import { AuthModule } from './components/auth/auth/auth.module';
 import { NzDemoLayoutTopComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NzDemoFormRegisterComponent } from './components/auth/signup/signup.component';
+import { UsersComponent } from './components/users/users.component';
 
 
 //ngzorro
@@ -25,7 +26,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -36,6 +37,7 @@ import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MailComponent } from './components/mail/mail.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 
 registerLocaleData(en);
@@ -44,13 +46,14 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     NzDemoFormNormalLoginComponent,
-    CardComponent,
+    NzDemoCardMetaComponent,
     NzDemoLayoutTopComponent,
     NzDemoFormRegisterComponent,
     DashboardComponent,
     ProfileComponent,
     MailComponent,
-    NotificationComponent
+    NotificationComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -72,6 +75,7 @@ registerLocaleData(en);
     NzAvatarModule,
     NzBadgeModule,
     NzPopoverModule,
+    NzCardModule
 
   ],
   providers: [

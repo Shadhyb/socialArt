@@ -12,6 +12,7 @@ import {
 import { Router } from '@angular/router';
 import { BehaviorSubject, map, of } from 'rxjs';
 
+
 export interface AuthData {}
 
 @Injectable({
@@ -32,29 +33,34 @@ export class FirebaseAuthService {
   autoLogoutTimer: any;
 
   signUp(
+
     email: string,
     password: string,
     displayName: string,
 
-  ) {
+  )
+  {
     return createUserWithEmailAndPassword(this.auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        return updateProfile(user, {
-            displayName:displayName,
-        }).then(()=> {
-          this.logIn({'email': email, 'password': password});
-          return user;
-        })
+    .then((userCredential) => {
+      const user = userCredential.user;
+      return updateProfile(user, {
+      displayName:displayName,
+      }).then(()=> {
+        this.logIn({'email': email, 'password': password, 'displayName': displayName});
+
+        return user
+
+      })
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(`Codice errore: ${errorCode}, messaggio: ${errorMessage}`);
       });
-  }
+    }
 
-  logIn(data: { email: string; password: string }) {
+
+  logIn(data: { email: string; password: string, displayName: string}) {
     signInWithEmailAndPassword(this.auth, data.email, data.password)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -64,9 +70,11 @@ export class FirebaseAuthService {
           JSON.stringify({
             displayName: user.displayName,
             email: user.email,
-            uid: user.uid,
           })
-        );
+          );
+
+          console.log(user.displayName)
+
         this.authSubject.next(user);
         this.router.navigate(['/home']);
       })

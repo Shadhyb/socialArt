@@ -29,13 +29,17 @@ import { HttpClient } from '@angular/common/http';
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" [nzLg]="8" nzFor="password" nzRequired>Password</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
+
+
           <input
-            nz-input
-            type="password"
-            id="password"
-            formControlName="password"
-            (ngModelChange)="updateConfirmValidator()"
+          nz-input
+          type="password"
+          id="password"
+          formControlName="password"
+
+          (ngModelChange)="updateConfirmValidator()"
           />
+
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
@@ -162,20 +166,25 @@ export class NzDemoFormRegisterComponent implements OnInit {
       });
     }
     let data = {
+
       email: this.validateForm.value.email,
       password: this.validateForm.value.password,
-      name: this.validateForm.value.userName,
+      name: this.validateForm.value.nickname,
     };
+    console.log(data.name);
     this.fbA
       .signUp(data.email, data.password, data.name)
       .then((user: any) =>{
         console.log(user);
         this.fDb.post(user.uid, data.name, data.email)
+
       }
       )
       .then(() =>
-        this.fbA.logIn({ email: data.email, password: data.password })
+        this.fbA.logIn({ email: data.email, password: data.password, displayName: data.name})
       );
+      this.http.post('https://bearts-81e0c-default-rtdb.europe-west1.firebasedatabase.app/users.json',this.validateForm.value).subscribe(response => console.log(response), response => response.status === true)
+
   }
   userNameAsyncValidator = (control: UntypedFormControl) =>
   new Observable((observer: Observer<ValidationErrors | null>) => {
@@ -206,14 +215,14 @@ export class NzDemoFormRegisterComponent implements OnInit {
 
 
 
-  constructor(private fb: UntypedFormBuilder, private fbA:FirebaseAuthService, private fDb: FirebaseDbService) { }
+  constructor(private fb: UntypedFormBuilder, private fbA:FirebaseAuthService, private fDb: FirebaseDbService, private http:HttpClient) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       email: [null, [Validators.email, Validators.required]],
-      password: [null, [Validators.required]],
+      password: [null, [Validators.required, Validators.minLength(6)]],
       checkPassword: [null, [Validators.required, this.confirmationValidator]],
-      nickname: [null, [Validators.required]],
+      nickname: ['',[Validators.required],[this.userNameAsyncValidator]],
     });
   }
 
