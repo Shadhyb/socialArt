@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
-import { FacebookAuthProvider, UserCredential } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { FirebaseAuthService } from 'src/app/services/firebase-auth.service';
 import { FirebaseDbService } from 'src/app/services/firebase-db.service';
-import { getAuth } from "firebase/auth";
+import { UsersComponent } from '../users/users.component';
 
 
 @Component({
@@ -26,8 +27,11 @@ import { getAuth } from "firebase/auth";
           <li nz-menu-item>
             <nz-avatar
               nzIcon="user"
-              nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-            ></nz-avatar>
+              nzSrc=""
+              nz-popover
+              [nzPopoverContent]="profile"
+              nzPopoverPlacement="right"
+            ><a></a></nz-avatar>
           </li>
           <li nz-menu-item>
             <a
@@ -48,28 +52,26 @@ import { getAuth } from "firebase/auth";
               nz-popover
               [nzPopoverContent]="notification"
               nzPopoverPlacement="bottomLeft"
-              [routerLink]="'../notifications'"
+
             ></a>
           </li>
           <li>
-            <button>Esci</button>
+            <button routerLink="">Esci</button>
           </li>
         </ul>
       </nz-header>
       <nz-content>
-        <div class="inner-content">
-          <h3>Ciao</h3>
-          <span>{{nameView()}}</span>
-        </div>
-      </nz-content>
-      <nz-footer><h1>BeArts</h1>
-      <p>be parts of arts</p>
-    </nz-footer>
-  </nz-layout>
-  <ng-template #message>Messaggi</ng-template>
-  <ng-template #notification>Notifiche</ng-template>
-  <ng-template #cards></ng-template>
-  `,
+        <div class="inner-content" >
+          </div>
+        </nz-content>
+        <nz-footer><h1>BeArts</h1>
+        <p>be parts of arts</p>
+      </nz-footer>
+    </nz-layout>
+    <ng-template #message>Messaggi</ng-template>
+    <ng-template #notification>Notifiche</ng-template>
+    <ng-template #profile><app-profile></app-profile></ng-template>
+    <ng-template #cards></ng-template> `,
   styles: [
     `
       @import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
@@ -170,21 +172,25 @@ import { getAuth } from "firebase/auth";
   ],
 })
 export class NzDemoLayoutTopComponent {
+LoggedIn(): boolean|undefined {
+throw new Error('Method not implemented.');
+}
+  private authSubject = new BehaviorSubject<any>(null);
+
+  user$ = this.authSubject.asObservable();
+  isLoggedIn$ = this.user$.pipe(map((user) => !!user))
 
 
 
-  constructor(private fbA:FirebaseAuthService){
+
+
+
+  constructor(private fbA:FirebaseAuthService, private fbD:FirebaseDbService){
+
+    console.log(fbD.database);
 
 }
 
-nameView(){
-  const auth = getAuth();
-  const user = auth.currentUser;
-  let userName = auth.currentUser?.displayName;
-
-
-
-}
 
 }
 

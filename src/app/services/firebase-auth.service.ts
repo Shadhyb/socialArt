@@ -8,9 +8,12 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
+  GoogleAuthProvider,
+  signInWithRedirect
 } from 'firebase/auth';
 import { Router } from '@angular/router';
 import { BehaviorSubject, map, of } from 'rxjs';
+
 
 
 export interface AuthData {}
@@ -21,6 +24,10 @@ export interface AuthData {}
 export class FirebaseAuthService {
   app = initializeApp(environment.firebaseConfig);
   auth = getAuth(this.app);
+
+
+
+
 
   constructor(private router: Router) {
     this.restoreUser();
@@ -44,36 +51,36 @@ export class FirebaseAuthService {
     .then((userCredential) => {
       const user = userCredential.user;
       return updateProfile(user, {
-      displayName:displayName,
+        displayName:displayName,
       }).then(()=> {
         this.logIn({'email': email, 'password': password, 'displayName': displayName});
 
-        return user
+        return user.displayName
 
       })
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(`Codice errore: ${errorCode}, messaggio: ${errorMessage}`);
-      });
-    }
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(`Codice errore: ${errorCode}, messaggio: ${errorMessage}`);
+    });
+  }
 
 
   logIn(data: { email: string; password: string, displayName: string}) {
     signInWithEmailAndPassword(this.auth, data.email, data.password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-        localStorage.setItem(
-          'user',
-          JSON.stringify({
-            displayName: user.displayName,
-            email: user.email,
-          })
-          );
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log(user);
+      localStorage.setItem(
+        'user',
+        JSON.stringify({
+          displayName: user.displayName,
+          email: user.email,
+        })
+        );
 
-          console.log(user.displayName)
+        let username = user.displayName
 
         this.authSubject.next(user);
         this.router.navigate(['/home']);
@@ -83,10 +90,10 @@ export class FirebaseAuthService {
         const errorMessage = error.message;
         console.log(`Codice errore: ${errorCode}, messaggio: ${errorMessage}`);
       });
-  }
+    }
 
-  signOut() {
-    signOut(this.auth)
+    signOut() {
+      signOut(this.auth)
       .then(() => {
         localStorage.removeItem('user');
         this.authSubject.next(null);
@@ -96,15 +103,16 @@ export class FirebaseAuthService {
         const errorMessage = error.message;
         console.log(`Codice errore: ${errorCode}, messaggio: ${errorMessage}`);
       });
-  }
-
-  restoreUser() {
-    const userJson = localStorage.getItem('user');
-    console.log(userJson);
-    if (!userJson) {
-      return;
     }
-    const user = JSON.parse(userJson);
-    this.authSubject.next(user);
+
+    restoreUser() {
+      const userJson = localStorage.getItem('user');
+      console.log(userJson);
+      if (!userJson) {
+        return ;
+      }
+      const user = JSON.parse(userJson);
+      this.authSubject.next(user);
+    }
+
   }
-}

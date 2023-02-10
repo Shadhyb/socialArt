@@ -1,0 +1,81 @@
+
+.inner-content{
+  display: flex;
+  color:white;
+  text-align: center;
+  line-height: 1.2em;
+}
+#profile{
+  position:fixed;
+  top:0;
+  right:0;
+  height: 100vh;
+  justify-content: space-between;
+  background: #303030;
+  z-index:9;
+  transition-duration:0.5s;
+  overflow: hidden;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+
+  #profile-content{
+    width: 100%;
+    max-width: 700px;
+    padding: 2em;
+
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+
+
+
+  }
+  #username{
+    color: #e91e63;
+  }
+  :host ::ng-deep .avatar-uploader > .ant-upload {
+    width: 128px;
+    height: 128px;
+  }
+
+  .active{
+    width: 100vw;
+  }
+  .idle{
+    width: 0;
+  }
+
+  #add{
+    background-color: #e91e63;
+
+    span{
+      font-size: larger;
+    }
+  }
+  h3,p{color:white;}
+
+textarea{
+  border:none;
+  width: 100%;
+  padding:1em;
+  border-radius: 1em;
+  margin-bottom: .5em;
+  resize: none;
+  outline: none;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+button {
+  background-color: #e91e63;
+  border: none;
+}
+button:hover {
+  background-color: #e91e63;
+  color: greenyellow;
+}
+
+}

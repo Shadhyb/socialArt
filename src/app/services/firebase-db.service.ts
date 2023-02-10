@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { child, get, getDatabase, onValue, push, ref, set } from "firebase/database";
 import { environment } from 'src/environments/environment';
+
 @Injectable({
   providedIn: 'any'
 })
@@ -31,6 +32,7 @@ post(userId: string, name:string, email:string){
 
 
     set(a, {
+      id: userId,
       email: email,
       username: name,
     }).catch((error) => {

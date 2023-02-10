@@ -20,6 +20,8 @@
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
     "firebase": "^9.16.0",
+    "firebase-admin": "^11.5.0",
+    "firebasets": "^1.2.13",
     "ng-zorro-antd": "^14.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FirebaseAuthService } from 'src/app/services/firebase-auth.service';
 import { FirebaseDbService } from 'src/app/services/firebase-db.service';
-import { get, } from 'firebase/database';
+import { Observable, Observer } from 'rxjs';
+import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
+import { UserCredential } from 'firebase/auth';
+
+import { NzMessageService } from 'ng-zorro-antd/message';
+
+
 
 
 @Component({
@@ -11,9 +17,65 @@ import { get, } from 'firebase/database';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+loading = false;
+avatarUrl?: string;
+@Input() show: boolean | undefined;
+
+
+  constructor(private msg: NzMessageService, private fbA:FirebaseAuthService) {}
+
+  beforeUpload = (file: NzUploadFile, _fileList: NzUploadFile[]): Observable<boolean> =>
+    new Observable((observer: Observer<boolean>) => {
+      const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+      if (!isJpgOrPng) {
+        this.msg.error('You can only upload JPG file!');
+        observer.complete();
+        return;
+      }
+      const isLt2M = file.size! / 1024 / 1024 < 5;
+      if (!isLt2M) {
+        this.msg.error('Image must smaller than 5MB!');
+        observer.complete();
+        return;
+      }
+      observer.next(isJpgOrPng && isLt2M);
+      observer.complete();
+    });
+
+  private getBase64(img: File, callback: (img: string) => void): void {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result!.toString()));
+    reader.readAsDataURL(img);
+  }
+
+  handleChange(info: { file: NzUploadFile }): void {
+    switch (info.file.status) {
+      case 'uploading':
+         this.loading = true;
+        break;
+      case 'done':
+
+        // Get this url from response in real world.
+        this.getBase64(info.file!.originFileObj!, (img: string) => {
+          this.loading = false;
+          this.avatarUrl = img;
+        });
+        break;
+      case 'error':
+        this.msg.error('Network error');
+        this.loading = false;
+        break;
+    }
+  }
+  @Input() username = '';
+  name(){
+    return this.fbA.auth.currentUser?.displayName
+
+  }
+
 
   ngOnInit(): void {
+
   }
 
 }

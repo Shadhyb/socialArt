@@ -1,6 +1,18 @@
 <div class="container" nz-row nzFlex>
 
-  <div nz-col [nzXs]="{ span: 11, offset: 1 }" [nzLg]="{ span: 6, offset: 2 }"><h1>BeArts</h1>
-  <button nz-button [routerLink]="'signup'" nzShape="round">Entra </button></div>
+  <div nz-col [nzXs]="{ span: 11, offset: 1 }" [nzLg]="{ span: 62, offset: 2 }"><h1>BeArts</h1>
+    <p>be parts of arts
+  <button nz-button
+  nz-popover
+  nz-popover-color="#303030"
+  [(nzPopoverVisible)]="visible"
+  (nzPopoverVisibleChange)="change($event)"
+  nzPopoverTrigger="click"
+  [nzPopoverContent]="signup"
+  nzPopoverPlacement="right" nzShape="round">Entra </button>
+
+</p>
 
 </div>
+</div>
+<ng-template #signup><nz-demo-form-register></nz-demo-form-register></ng-template>

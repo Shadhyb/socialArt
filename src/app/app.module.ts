@@ -38,7 +38,10 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { MailComponent } from './components/mail/mail.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { NzCardModule } from 'ng-zorro-antd/card';
-
+import { NzUploadModule, NzUploadFile  } from 'ng-zorro-antd/upload';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzModalModule} from 'ng-zorro-antd/modal';
+import { CreatePostComponent } from './components/create-post/create-post.component';
 
 registerLocaleData(en);
 
@@ -53,7 +56,8 @@ registerLocaleData(en);
     ProfileComponent,
     MailComponent,
     NotificationComponent,
-    UsersComponent
+    UsersComponent,
+    CreatePostComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +79,11 @@ registerLocaleData(en);
     NzAvatarModule,
     NzBadgeModule,
     NzPopoverModule,
-    NzCardModule
+    NzCardModule,
+    NzUploadModule,
+    NzMessageModule,
+    NzModalModule,
+
 
   ],
   providers: [

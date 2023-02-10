@@ -1,1 +1,31 @@
-<p>profile works!</p>
+
+
+<div class="inner-content">
+  <div id="profile" [ngClass]="{'active': show, 'idle':!show}">
+  <h3>Aggiorna il tuo profilo <span id="username">{{name()}}</span> </h3>
+
+<div id="profile-content">
+  <label for="text">Descriviti:</label>
+  <textarea></textarea>
+  <nz-upload
+  class="avatar-uploader"
+  nzAction=""
+  nzName="avatar"
+  nzListType="picture-card"
+  [nzShowUploadList]="false"
+  [nzBeforeUpload]="beforeUpload"
+  (nzChange)="handleChange($event)"
+>
+  <ng-container *ngIf="!avatarUrl">
+    <span class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></span>
+    <div class="ant-upload-text">Upload</div>
+  </ng-container>
+  <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%"/>
+</nz-upload>
+<div>Crea i tuoi post:
+  <button id="add" nz-button><span nz-icon nzType="plus" nzTheme="outline"></span></button>
+</div>
+</div>
+</div>
+</div>
+
