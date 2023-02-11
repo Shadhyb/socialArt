@@ -3,12 +3,15 @@ import { Injectable } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
+
 export interface Post{
-  userId:string,
+
+  id:number;
+  userId:string;
   title:string,
-  description:string,
-  ingredients:string,
-  method:string,
+  description:string;
+  imgUrl:string;
+  userName:string;
 }
 
 export interface Fav{
