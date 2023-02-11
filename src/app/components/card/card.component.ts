@@ -1,9 +1,22 @@
+
 import { Component } from '@angular/core';
+
 
 @Component({
   selector: 'nz-demo-card-meta',
   template: `
-    <nz-card style="width:300px;" [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+
+   <div>Crea i tuoi post:
+  <button id="add" nz-button (click)="showModalMiddle()">
+    <span nz-icon nzType="plus" nzTheme="outline"></span>
+  </button>
+</div>
+<nz-modal [(nzVisible)]="isVisibleMiddle"
+      nzCentered
+      (nzOnCancel)="handleCancelMiddle()"
+      (nzOnOk)="handleOkMiddle()" >
+  <ng-container *nzModalContent>
+  <nz-card style="width:300px;" [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
       <nz-card-meta
         nzTitle="Card title"
         nzDescription="This is the description"
@@ -25,6 +38,49 @@ import { Component } from '@angular/core';
     <ng-template #actionEllipsis>
       <span nz-icon nzType="ellipsis"></span>
     </ng-template>
-  `
+    </ng-container>
+</nz-modal>
+
+
+  `,
+  styles:[
+    `[nz-modal]{
+      background:#303030
+    }
+    button {
+        background-color: #e91e63;
+        border: none;
+      }
+      button:hover {
+        background-color: #e91e63;
+        color: greenyellow;
+      }
+   `
+  ]
 })
-export class NzDemoCardMetaComponent {}
+export class NzDemoCardMetaComponent {
+  isVisibleMiddle = false;
+  isConfirmLoading= false;
+
+  showModalMiddle(): void {
+    this.isVisibleMiddle = true;
+    console.log(this.isVisibleMiddle)
+
+  }
+  handleOkMiddle(): void {
+    console.log('click ok');
+    this.isVisibleMiddle = false;
+    setTimeout(() => {
+      this.isVisibleMiddle = false;
+      this.isConfirmLoading = false;
+    }, 2000);
+  }
+
+  handleCancelMiddle(): void {
+    this.isVisibleMiddle = false;
+  }
+  createpost(){
+
+  }
+
+}

@@ -16,14 +16,15 @@
   [nzBeforeUpload]="beforeUpload"
   (nzChange)="handleChange($event)"
 >
-  <ng-container *ngIf="!avatarUrl">
+  <ng-container  *ngIf="!avatarUrl">
     <span class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></span>
     <div class="ant-upload-text">Upload</div>
   </ng-container>
   <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%"/>
 </nz-upload>
-<div>Crea i tuoi post:
-  <button id="add" nz-button><span nz-icon nzType="plus" nzTheme="outline"></span></button>
+
+<div>Crea i tuoi post
+  <button  nz-button routerLink="../post">Crea</button>
 </div>
 </div>
 </div>

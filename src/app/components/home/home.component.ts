@@ -31,7 +31,7 @@ import { UsersComponent } from '../users/users.component';
               nz-popover
               [nzPopoverContent]="profile"
               nzPopoverPlacement="right"
-            ><a></a></nz-avatar>
+            ><a><ng-template #avatar></ng-template></a></nz-avatar>
           </li>
           <li nz-menu-item>
             <a
@@ -56,12 +56,23 @@ import { UsersComponent } from '../users/users.component';
             ></a>
           </li>
           <li>
-            <button routerLink="">Esci</button>
+            <button id="logout" (click)="logout()" routerLink="">Esci</button>
           </li>
         </ul>
       </nz-header>
       <nz-content>
-        <div class="inner-content" >
+        <div class="inner-content"
+ >
+ <div nz-row>
+  <div class="" *ngFor="let p of post"
+        nz-col
+    [nzXs]="{ span: 24 }"
+    [nzMd]="{ span: 12 }"
+    [nzLg]="{ span: 8 }"
+    [nzXl]="{ span: 6}">
+  </div>
+ </div>
+
           </div>
         </nz-content>
         <nz-footer><h1>BeArts</h1>
@@ -71,7 +82,8 @@ import { UsersComponent } from '../users/users.component';
     <ng-template #message>Messaggi</ng-template>
     <ng-template #notification>Notifiche</ng-template>
     <ng-template #profile><app-profile></app-profile></ng-template>
-    <ng-template #cards></ng-template> `,
+    <ng-template #avatar></ng-template>
+    `,
   styles: [
     `
       @import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
@@ -86,16 +98,23 @@ import { UsersComponent } from '../users/users.component';
       h1 {
         color: greenyellow;
         font-family: 'Shadows Into Light', cursive;
+        margin-bottom:0;
+
       }
       h3{
         color:#fff;
         span{
           font-family: 'Shadows Into Light', cursive;
           color:greenyellow;
+
         }
       }
       p{
        color:aqua;
+       font-family: 'Shadows Into Light', cursive;
+       padding-left: 5.5em;
+       margin-top: 0;
+        font-size:larger;
 
       }
       [nz-icon] {
@@ -123,14 +142,14 @@ import { UsersComponent } from '../users/users.component';
         padding-left: 10px;
         align-items: baseline;
         background: #e91e63;
+        position:sticky;
+        z-index:10;
       }
       nz-layout{
         background: #303030;
         color:#fff
       }
-      nz-footer {
-        background: #303030;
-      }
+
       ul {
         list-style-type: none;
       }
@@ -149,7 +168,9 @@ import { UsersComponent } from '../users/users.component';
       }
 
       nz-footer {
+        background: #303030;
         text-align: center;
+
       }
 
       .inner-content {
@@ -160,6 +181,7 @@ import { UsersComponent } from '../users/users.component';
         height:100vh;
 
       }
+      #logout {background:none}
       button {
         background-color: #e91e63;
         border: none;
@@ -172,14 +194,15 @@ import { UsersComponent } from '../users/users.component';
   ],
 })
 export class NzDemoLayoutTopComponent {
-LoggedIn(): boolean|undefined {
-throw new Error('Method not implemented.');
+post: any;
+logout() {
+return this.fbA.signOut()
 }
+
   private authSubject = new BehaviorSubject<any>(null);
 
   user$ = this.authSubject.asObservable();
   isLoggedIn$ = this.user$.pipe(map((user) => !!user))
-
 
 
 

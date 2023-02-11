@@ -44,7 +44,7 @@ import { FirebaseDbService } from 'src/app/services/firebase-db.service';
       </div>
       <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" nzShape="round">Log in</button>
       Or
-      <a routerLink="/signup">register now!</a>
+      <a routerLink="">register now!</a>
     </form>
   </div>
   </div>

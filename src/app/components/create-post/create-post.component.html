@@ -1,1 +1,69 @@
-<p>create-post works!</p>
+
+ <nz-layout>
+  <nz-header>
+    <div class="logo"><h1>BeArts</h1></div>
+    <ul nz-row nz-menu nzMode="horizontal">
+      <li nz-menu-item>
+        <nz-input-group [nzSuffix]="suffixIconSearch">
+          <input type="text" nz-input placeholder="search" />
+        </nz-input-group>
+        <ng-template #suffixIconSearch>
+          <button nz-button nzType="primary" nzSearch nzShape="circle">
+            <span nz-icon nzType="search"></span>
+          </button>
+        </ng-template>
+      </li>
+      <li nz-menu-item>
+        <nz-avatar
+          nzIcon="user"
+          nzSrc=""
+          nz-popover
+          [nzPopoverContent]="profile"
+          nzPopoverPlacement="right"
+        ><a><ng-template #avatar></ng-template></a></nz-avatar>
+      </li>
+      <li nz-menu-item>
+        <a
+          nz-icon
+          nzType="mail"
+          nzTheme="fill"
+          nz-popover
+          [nzPopoverContent]="message"
+          nzPopoverPlacement="bottomRight"
+          routerLink="messages"
+        ></a>
+      </li>
+      <li nz-menu-item>
+        <a
+          nz-icon
+          nzType="bell"
+          nzTheme="fill"
+          nz-popover
+          [nzPopoverContent]="notification"
+          nzPopoverPlacement="bottomLeft"
+
+        ></a>
+      </li>
+      <li>
+        <button id="logout" (click)="logout()" routerLink="">Esci</button>
+      </li>
+    </ul>
+  </nz-header>
+  <nz-content>
+    <div class="inner-content" >
+      <nz-demo-card-meta></nz-demo-card-meta>
+      </div>
+    </nz-content>
+    <nz-footer><h1>BeArts</h1>
+    <p>be parts of arts</p>
+  </nz-footer>
+</nz-layout>
+<ng-template #message>Messaggi</ng-template>
+<ng-template #notification>Notifiche</ng-template>
+<ng-template #profile><app-profile></app-profile></ng-template>
+<ng-template #avatar></ng-template>
+
+
+
+
+

@@ -20,6 +20,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: NzDemoLayoutTopComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'messages',
@@ -39,8 +40,18 @@ const routes: Routes = [
 
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+
   },
+  {
+    path: 'post',
+    component: CreatePostComponent
+  },
+  {
+    path: 'card',
+    component: NzDemoCardMetaComponent
+  },
+
   {
     path: 'login',
     component: NzDemoFormNormalLoginComponent,
@@ -55,14 +66,7 @@ const routes: Routes = [
       }
     ]
   },
-  {
-    path:'post',
-    component: CreatePostComponent
-  },
-  {
-    path: 'card',
-    component: NzDemoCardMetaComponent
-  }
+
 
 ];
 

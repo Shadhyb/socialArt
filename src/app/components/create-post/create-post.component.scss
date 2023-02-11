@@ -1,0 +1,105 @@
+
+      @import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+
+      .logo {
+        width: 120px;
+        height: 31px;
+
+        margin: 16px 24px 16px 0;
+        float: left;
+      }
+      h1 {
+        color: greenyellow;
+        font-family: 'Shadows Into Light', cursive;
+        margin-bottom:0;
+
+      }
+      h3{
+        color:#fff;
+        span{
+          font-family: 'Shadows Into Light', cursive;
+          color:greenyellow;
+
+        }
+      }
+      p{
+       color:aqua;
+       font-family: 'Shadows Into Light', cursive;
+       padding-left: 5.5em;
+       margin-top: 0;
+        font-size:larger;
+
+      }
+      [nz-icon] {
+        color: greenyellow;
+      }
+      a {
+       margin-left: 1em;
+       font-size:x-large;
+      }
+      a:nth-first-child{
+        margin-left:0
+      }
+      nz-input-group {
+        background: #303030;
+        color: #fff;
+        border: none;
+      }
+      input {
+        background: #303030;
+        color: #fff;
+      }
+      nz-header {
+        display: flex;
+        justify-content: space-between;
+        padding-left: 10px;
+        align-items: baseline;
+        background: #e91e63;
+        position:sticky;
+        z-index:10;
+      }
+      nz-layout{
+        background: #303030;
+        color:#fff
+      }
+
+      ul {
+        list-style-type: none;
+      }
+
+      [nz-menu] {
+        line-height: 64px;
+      }
+
+      nz-breadcrumb {
+        margin: 16px 0;
+      }
+
+      nz-content {
+        padding: 0 50px;
+
+      }
+
+      nz-footer {
+        background: #303030;
+        text-align: center;
+
+      }
+
+      .inner-content {
+        background: #4c4c4c;
+        color: #fff;
+        padding: 24px;
+        min-height: 280px;
+        height:100vh;
+
+      }
+      #logout {background:none}
+      button {
+        background-color: #e91e63;
+        border: none;
+      }
+      button:hover {
+        background-color: #e91e63;
+        color: greenyellow;
+      }

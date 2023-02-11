@@ -19,6 +19,8 @@ export class ProfileComponent implements OnInit {
 
 loading = false;
 avatarUrl?: string;
+isVisibleMiddle = false;
+isConfirmLoading= false;
 @Input() show: boolean | undefined;
 
 
@@ -70,8 +72,15 @@ avatarUrl?: string;
   @Input() username = '';
   name(){
     return this.fbA.auth.currentUser?.displayName
-
   }
+  avatar(){
+    return
+  }
+
+
+
+
+
 
 
   ngOnInit(): void {
