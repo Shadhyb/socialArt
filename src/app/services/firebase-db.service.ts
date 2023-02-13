@@ -27,7 +27,7 @@ export class FirebaseDbService {
     });
 
 }
-post(userId: string, name:string, email:string){
+post(userId: number, name:string, email:string){
     const a = ref(this.database, 'users/' + userId)
 
 

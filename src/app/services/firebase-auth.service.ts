@@ -80,7 +80,7 @@ export class FirebaseAuthService {
         })
         );
 
-        let username = user.displayName
+
 
         this.authSubject.next(user);
         this.router.navigate(['/home']);

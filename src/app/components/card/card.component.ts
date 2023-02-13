@@ -1,7 +1,11 @@
 
-import { Component } from '@angular/core';
-
-
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NzCardComponent } from 'ng-zorro-antd/card';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { FirebaseAuthService } from 'src/app/services/firebase-auth.service';
+import { PostsService } from 'src/app/services/posts.service';
 @Component({
   selector: 'nz-demo-card-meta',
   template: `
@@ -16,51 +20,132 @@ import { Component } from '@angular/core';
       (nzOnCancel)="handleCancelMiddle()"
       (nzOnOk)="handleOkMiddle()" >
   <ng-container *nzModalContent>
-  <nz-card style="width:300px;" [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
-      <nz-card-meta
-        nzTitle="Card title"
-        nzDescription="This is the description"
-        [nzAvatar]="avatarTemplate"
-      ></nz-card-meta>
+  <nz-card nzHoverable style="width:300px;" [nzCover]="coverTemplate" >
+      <nz-card-meta>
+   </nz-card-meta>
+
     </nz-card>
+    <ng-template #form>
+
+
+    </ng-template>
     <ng-template #avatarTemplate>
-      <nz-avatar nzSrc="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+      <nz-avatar nzSrc=""></nz-avatar>
     </ng-template>
     <ng-template #coverTemplate>
-      <img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />
+    <form #form="ngForm" (ngSubmit)="submit()" id="form">
+    <div ngModelGroup="formPost" class="form-group">
+      <div class="form-group">
+        <label id="cTitle" for="title">Title</label>
+        <input nz-input type="text" id="title" name="title" #title="ngModel" [ngModel]="postInterface.title" required />
+      </div>
+
+      <div *ngIf="img" class="form-group bb">
+        <label id="cTitle" for="imgUrl">Upload image</label>
+        <input nz-input id="imgUrl" type="file" accept="image/*" name="imgUrl" #photoSelector
+   [(ngModel)]="postInterface.imgUrl" />
+      </div>
+
+
+      <div class="form-group bb">
+        <label id="cPost" for="description">Description</label>
+        <textarea id="description" rows="2" nz-input type="text" name="description" #description="ngModel"
+          [(ngModel)]="postInterface.description" required></textarea>
+      </div>
+      <div  id="post-preview">
+        <img id="post-prewiew-image">
+
+      </div>
+
+      <div id="buttons">
+        <button [disabled]="!form.valid">
+          Post
+        </button>
+        <p (click)="imgToggle()">Add image</p>
+
+        <p [routerLink]="['post']"> Back</p>
+      </div>
+
+    </div>
+  </form>
     </ng-template>
-    <ng-template #actionSetting>
-      <span nz-icon nzType="setting"></span>
-    </ng-template>
-    <ng-template #actionEdit>
-      <span nz-icon nzType="edit"></span>
-    </ng-template>
-    <ng-template #actionEllipsis>
-      <span nz-icon nzType="ellipsis"></span>
-    </ng-template>
+
+
     </ng-container>
 </nz-modal>
 
 
   `,
   styles:[
-    `[nz-modal]{
-      background:#303030
+    `ng-container {
+      background:#303030;
+      display:flex;
+      flex-direction:column;
+      justify-content:center
+
+
+
     }
     button {
         background-color: #e91e63;
+        color:white;
         border: none;
+        margin: 2em 0;
       }
       button:hover {
         background-color: #e91e63;
         color: greenyellow;
       }
+     nz-card{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        padding:2em;
+      }
+      #post-preview{
+        text-align: right;
+        margin-top:1em;
+      }
+     #post-preview-image{
+      object-fit:cover;
+      object-position: center;
+      width:150px;
+      height:100px;
+      border-radius:1em;
+      border: 1px dashed gray;
+     }
+
    `
   ]
 })
 export class NzDemoCardMetaComponent {
+//   selectedImageFile: File | undefined;
+// onPhotoSelected(photoSelector: HTMLInputElement) {
+//   let photos = photoSelector.files[0]
+// this.selectedImageFile = photos;
+// if(this.selectedImageFile)return;
+
+// let fileReader = new FileReader();
+// fileReader.readAsDataURL(this.selectedImageFile)
+// let readebleString = fileReader.addEventListener('loaded', ev => fileReader.result?.toString())
+// let postPreviewImage:any =<HTMLImageElement> document.getElementById('post-preview-image');
+// postPreviewImage.src = readebleString;
+// }
+  print:boolean = false;
+
+  postInterface= {
+    id:'',
+    userId:'',
+    avatar:'',
+    title:'',
+    description:'',
+    imgUrl:'',
+    userName:'',
+  }
+  @ViewChild('form',{static: true}) form!: NgForm;
   isVisibleMiddle = false;
   isConfirmLoading= false;
+
 
   showModalMiddle(): void {
     this.isVisibleMiddle = true;
@@ -79,8 +164,38 @@ export class NzDemoCardMetaComponent {
   handleCancelMiddle(): void {
     this.isVisibleMiddle = false;
   }
-  createpost(){
+  submit(){
+
+    this.print = true;
+    console.log(this.form.value.formPost.title)
+    let data = {
+      'userId': this.userId,
+      'title': this.form.value.formPost.title,
+      'id':this.form.value.formPost.id,
+      'avatar': this.form.value.formPost.avatar,
+      'description': this.form.value.formPost.description,
+      'imgUrl': this.form.value.formPost.imgUrl,
+      'userName': this.userName,
+    }
+
+    this.ps.postPost(data).subscribe(data => console.log(data));
+    this.router.navigate(['post']);
 
   }
+  constructor( private fbA:FirebaseAuthService, private ps:PostsService, private router:Router){
+  }
+    userId: string = '';
+    userName:string = '';
+    ngOnInit(): void {
+      const userJson = localStorage.getItem('user');
+      if(!userJson) return;
+      const user = JSON.parse(userJson);
+      this.userId = user.id;
+      this.userName = user.displayName;
+    }
+    img=false;
+    imgToggle(){
+      this.img = !this.img;
+    }
 
 }

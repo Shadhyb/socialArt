@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 export interface Post{
 
   id:number;
+  avatar:string;
   userId:string;
   title:string,
   description:string;

@@ -18,6 +18,7 @@ import { NzDemoLayoutTopComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NzDemoFormRegisterComponent } from './components/auth/signup/signup.component';
 import { UsersComponent } from './components/users/users.component';
+import { CreatePostComponent } from './components/create-post/create-post.component';
 
 
 //ngzorro
@@ -41,8 +42,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzUploadModule, NzUploadFile  } from 'ng-zorro-antd/upload';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzModalModule} from 'ng-zorro-antd/modal';
-import { CreatePostComponent } from './components/create-post/create-post.component';
-
+import { NzImageModule } from 'ng-zorro-antd/image';
 registerLocaleData(en);
 
 @NgModule({
@@ -83,6 +83,7 @@ registerLocaleData(en);
     NzUploadModule,
     NzMessageModule,
     NzModalModule,
+    NzImageModule,
 
 
   ],

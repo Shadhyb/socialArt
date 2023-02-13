@@ -197,8 +197,8 @@ export class NzDemoFormRegisterComponent implements OnInit {
       .signUp(data.email, data.password, data.name)
       .then((user: any) => {
         console.log(user);
-        this.fDb.post(user.uid, data.name, data.email);
-        const uId= this.fDb.post
+        this.fDb.post(user.id, data.name, data.email);
+
       }
       )
       .then(() =>
