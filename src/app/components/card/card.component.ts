@@ -1,5 +1,5 @@
 
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzCardComponent } from 'ng-zorro-antd/card';
@@ -37,12 +37,12 @@ import { PostsService } from 'src/app/services/posts.service';
     <div ngModelGroup="formPost" class="form-group">
       <div class="form-group">
         <label id="cTitle" for="title">Title</label>
-        <input nz-input type="text" id="title" name="title" #title="ngModel" [ngModel]="postInterface.title" required />
+        <input nz-input type="text" id="title" name="title" #title="ngModel" [(ngModel)]="postInterface.title" required />
       </div>
 
       <div *ngIf="img" class="form-group bb">
         <label id="cTitle" for="imgUrl">Upload image</label>
-        <input nz-input id="imgUrl" type="file" accept="image/*" name="imgUrl" #photoSelector
+        <input nz-input id="imgUrl" type="file" name="imgUrl"
    [(ngModel)]="postInterface.imgUrl" />
       </div>
 
@@ -52,10 +52,9 @@ import { PostsService } from 'src/app/services/posts.service';
         <textarea id="description" rows="2" nz-input type="text" name="description" #description="ngModel"
           [(ngModel)]="postInterface.description" required></textarea>
       </div>
-      <div  id="post-preview">
-        <img id="post-prewiew-image">
 
-      </div>
+
+
 
       <div id="buttons">
         <button [disabled]="!form.valid">
@@ -63,7 +62,7 @@ import { PostsService } from 'src/app/services/posts.service';
         </button>
         <p (click)="imgToggle()">Add image</p>
 
-        <p [routerLink]="['post']"> Back</p>
+        <p [routerLink]="['/home']"> Back</p>
       </div>
 
     </div>
@@ -118,26 +117,16 @@ import { PostsService } from 'src/app/services/posts.service';
    `
   ]
 })
-export class NzDemoCardMetaComponent {
-//   selectedImageFile: File | undefined;
-// onPhotoSelected(photoSelector: HTMLInputElement) {
-//   let photos = photoSelector.files[0]
-// this.selectedImageFile = photos;
-// if(this.selectedImageFile)return;
+export class NzDemoCardMetaComponent implements OnInit {
 
-// let fileReader = new FileReader();
-// fileReader.readAsDataURL(this.selectedImageFile)
-// let readebleString = fileReader.addEventListener('loaded', ev => fileReader.result?.toString())
-// let postPreviewImage:any =<HTMLImageElement> document.getElementById('post-preview-image');
-// postPreviewImage.src = readebleString;
-// }
+
   print:boolean = false;
 
+
   postInterface= {
-    id:'',
     userId:'',
-    avatar:'',
     title:'',
+    id:'',
     description:'',
     imgUrl:'',
     userName:'',
@@ -164,24 +153,6 @@ export class NzDemoCardMetaComponent {
   handleCancelMiddle(): void {
     this.isVisibleMiddle = false;
   }
-  submit(){
-
-    this.print = true;
-    console.log(this.form.value.formPost.title)
-    let data = {
-      'userId': this.userId,
-      'title': this.form.value.formPost.title,
-      'id':this.form.value.formPost.id,
-      'avatar': this.form.value.formPost.avatar,
-      'description': this.form.value.formPost.description,
-      'imgUrl': this.form.value.formPost.imgUrl,
-      'userName': this.userName,
-    }
-
-    this.ps.postPost(data).subscribe(data => console.log(data));
-    this.router.navigate(['post']);
-
-  }
   constructor( private fbA:FirebaseAuthService, private ps:PostsService, private router:Router){
   }
     userId: string = '';
@@ -197,5 +168,26 @@ export class NzDemoCardMetaComponent {
     imgToggle(){
       this.img = !this.img;
     }
+  submit(){
+
+    this.print = true;
+    console.log(this.postInterface.title)
+    let data = {
+      'uid': this.userId,
+      'title': this.postInterface.title,
+      'id':this.postInterface.id,
+      'description': this.postInterface.description,
+      'imgUrl': this.postInterface.imgUrl,
+      'userName': this.userName,
+    }
+    console.log(data)
+
+    this.ps.postPost(data).subscribe(data => console.log(data));
+
+    this.router.navigate(['/post']);
+
+
+  }
+
 
 }

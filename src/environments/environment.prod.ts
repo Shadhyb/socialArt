@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  URL:'https://63ecf73fbe929df00cb6306d.mockapi.io/api/',
   firebaseConfig:{
     apiKey: "AIzaSyANFqY0RuotF1gx4zR3ejy298vVDlo493g",
     authDomain: "bearts-81e0c.firebaseapp.com",

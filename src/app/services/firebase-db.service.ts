@@ -28,6 +28,7 @@ export class FirebaseDbService {
 
 }
 post(userId: number, name:string, email:string){
+
     const a = ref(this.database, 'users/' + userId)
 
 
@@ -40,4 +41,4 @@ post(userId: number, name:string, email:string){
       const errorMessage = error.message;
       console.log(`Codice errore: ${errorCode}, messaggio: ${errorMessage}`);
     });
-}}
+  }}

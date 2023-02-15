@@ -45,7 +45,8 @@ const routes: Routes = [
   },
   {
     path: 'post',
-    component: CreatePostComponent
+    component: CreatePostComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'card',

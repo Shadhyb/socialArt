@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  URL:'https://63ecf73fbe929df00cb6306d.mockapi.io/api/',
   firebaseConfig : {
     databaseURL: "https://bearts-81e0c-default-rtdb.europe-west1.firebasedatabase.app",
     apiKey: "AIzaSyANFqY0RuotF1gx4zR3ejy298vVDlo493g",
