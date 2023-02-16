@@ -57,12 +57,12 @@ import { PostsService } from 'src/app/services/posts.service';
 
 
       <div id="buttons">
-        <button [disabled]="!form.valid">
+        <button [disabled]="!form.valid" [routerLinkActive]="'home'">
           Post
         </button>
         <p (click)="imgToggle()">Add image</p>
 
-        <p [routerLink]="['/home']"> Back</p>
+        <p [routerLink]="['home']"> Back</p>
       </div>
 
     </div>
@@ -120,6 +120,7 @@ import { PostsService } from 'src/app/services/posts.service';
 export class NzDemoCardMetaComponent implements OnInit {
 
 
+
   print:boolean = false;
 
 
@@ -148,6 +149,7 @@ export class NzDemoCardMetaComponent implements OnInit {
       this.isVisibleMiddle = false;
       this.isConfirmLoading = false;
     }, 2000);
+    this.router.navigate(['post']);
   }
 
   handleCancelMiddle(): void {
@@ -184,7 +186,8 @@ export class NzDemoCardMetaComponent implements OnInit {
 
     this.ps.postPost(data).subscribe(data => console.log(data));
 
-    this.router.navigate(['/post']);
+
+    this.router.navigate(['post']);
 
 
   }

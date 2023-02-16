@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FirebaseAuthService } from 'src/app/services/firebase-auth.service';
 import { FirebaseDbService } from 'src/app/services/firebase-db.service';
 import { Observable, Observer } from 'rxjs';
+import { Route, Router } from '@angular/router';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { UserCredential } from 'firebase/auth';
 
@@ -24,7 +25,7 @@ isConfirmLoading= false;
 @Input() show: boolean | undefined;
 
 
-  constructor(private msg: NzMessageService, private fbA:FirebaseAuthService) {}
+  constructor(private msg: NzMessageService, private fbA:FirebaseAuthService, private routes:Router) {}
 
   beforeUpload = (file: NzUploadFile, _fileList: NzUploadFile[]): Observable<boolean> =>
     new Observable((observer: Observer<boolean>) => {
@@ -74,7 +75,10 @@ isConfirmLoading= false;
     return this.fbA.auth.currentUser?.displayName
   }
   avatar(){
-    return
+    return console.log(this.avatarUrl)
+  }
+  addFriends(){
+    this.routes.navigate(['/users'])
   }
 
 

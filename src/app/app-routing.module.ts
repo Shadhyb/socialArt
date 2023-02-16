@@ -12,6 +12,7 @@ import { MailComponent } from './components/mail/mail.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { CreatePostComponent } from './components/create-post/create-post.component';
 
+
 const routes: Routes = [
   {
     path: '',
@@ -50,23 +51,25 @@ const routes: Routes = [
   },
   {
     path: 'card',
-    component: NzDemoCardMetaComponent
+    component: NzDemoCardMetaComponent,
+
   },
 
   {
     path: 'login',
     component: NzDemoFormNormalLoginComponent,
-    children: [
-      {
-        path: 'users',
-        component: UsersComponent,
-      },
-      {
-        path: ':id',
-        component: ProfileComponent
-      }
-    ]
+
+
+
   },
+  {
+    path: 'users',
+    component: UsersComponent,
+  },
+  {
+    path: ':id',
+    component: ProfileComponent
+  }
 
 
 ];

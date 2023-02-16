@@ -14,10 +14,7 @@ export interface Post{
   userName:string;
 }
 
-export interface Fav{
-  userId:string,
-  postId:string,
-}
+
 
 @Injectable({
   providedIn: 'root'
@@ -47,18 +44,10 @@ export class PostsService {
     return this.http.put(`${environment.URL}/posts/${idString}`,data).pipe(catchError(this.errors))
   }
 
-  fav(data:Fav){
-    console.log(data);
-    return this.http.post(`${environment.URL}/fav`, data).pipe(catchError(this.errors))
-  }
 
-  getAllFav(){
-    return this.http.get<Fav[]>(`${environment.URL}/fav`).pipe(catchError(this.errors))
-  }
 
-  delFav(id:string){
-    return this.http.delete(`${environment.URL}/fav/${id}`).pipe(catchError(this.errors))
-  }
+
+
 
 
   private errors(err: any) {

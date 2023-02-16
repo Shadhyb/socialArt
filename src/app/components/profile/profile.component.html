@@ -5,8 +5,7 @@
   <h3>Aggiorna il tuo profilo <span id="username">{{name()}}</span> </h3>
 
 <div id="profile-content">
-  <label for="text">Descriviti:</label>
-  <textarea></textarea>
+<div>
   <nz-upload
   class="avatar-uploader"
   nzAction=""
@@ -16,16 +15,19 @@
   [nzBeforeUpload]="beforeUpload"
   (nzChange)="handleChange($event)"
 >
-  <ng-container  *ngIf="!avatarUrl">
+
+  <ng-container id="add" *ngIf="!avatarUrl">
     <span class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></span>
-    <div class="ant-upload-text">Upload</div>
+    <div class="ant-upload-text"></div>
+    <button (click)="avatar()">Upload</button>
   </ng-container>
   <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%"/>
 </nz-upload>
-
+</div>
 <div>Crea i tuoi post
   <button  nz-button routerLink="../post">Crea</button>
 </div>
+<button (click)="addFriends()">Amici</button>
 </div>
 </div>
 </div>

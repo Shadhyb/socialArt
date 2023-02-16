@@ -19,7 +19,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NzDemoFormRegisterComponent } from './components/auth/signup/signup.component';
 import { UsersComponent } from './components/users/users.component';
 import { CreatePostComponent } from './components/create-post/create-post.component';
-
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 
 //ngzorro
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -43,6 +43,9 @@ import { NzUploadModule, NzUploadFile  } from 'ng-zorro-antd/upload';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzModalModule} from 'ng-zorro-antd/modal';
 import { NzImageModule } from 'ng-zorro-antd/image';
+import { NzTableModule } from 'ng-zorro-antd/table';
+
+
 registerLocaleData(en);
 
 @NgModule({
@@ -57,7 +60,9 @@ registerLocaleData(en);
     MailComponent,
     NotificationComponent,
     UsersComponent,
-    CreatePostComponent
+    CreatePostComponent,
+
+
   ],
   imports: [
     BrowserModule,
@@ -84,6 +89,8 @@ registerLocaleData(en);
     NzMessageModule,
     NzModalModule,
     NzImageModule,
+    NzNotificationModule,
+    NzTableModule
 
 
   ],

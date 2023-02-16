@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-
+import { Subscription, combineLatest } from 'rxjs';
+import { Post } from 'src/app/post';
+import { PostsService } from 'src/app/services/posts.service';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { FirebaseAuthService } from 'src/app/services/firebase-auth.service';
 import { FirebaseDbService } from 'src/app/services/firebase-db.service';
@@ -16,7 +18,8 @@ import { UsersComponent } from '../users/users.component';
         <ul nz-row nz-menu nzMode="horizontal">
           <li nz-menu-item>
             <nz-input-group [nzSuffix]="suffixIconSearch">
-              <input type="text" nz-input placeholder="search" />
+              <input type="text" nz-input placeholder="search" nz-popover n/>
+
             </nz-input-group>
             <ng-template #suffixIconSearch>
               <button nz-button nzType="primary" nzSearch nzShape="circle">
@@ -64,13 +67,51 @@ import { UsersComponent } from '../users/users.component';
         <div class="inner-content"
  >
  <div nz-row>
-  <div class="" *ngFor="let p of post"
-        nz-col
-    [nzXs]="{ span: 24 }"
-    [nzMd]="{ span: 12 }"
-    [nzLg]="{ span: 8 }"
-    [nzXl]="{ span: 6}">
-  </div>
+ <div>
+      <nz-table
+        #rowSelectionTable
+        nzShowPagination
+        nzShowSizeChanger
+        [nzData]="listOfData"
+        [nzPageSizeOptions]="[5, 10, 15, 20, 50, 100]"
+        [nzPageSize]="5"
+        (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
+      >
+
+        <tbody>
+          <tr
+            *ngFor="let data of rowSelectionTable.data"
+            [routerLink]="['/details', data.post.id]"
+            id="bot"
+          >
+            <td>
+            <nz-card style="width:300px;" [nzCover]="coverTemplate" [nzActions]="[actionLike]">
+      <nz-card-meta
+        nzTitle="{{ data.post.userName }}"
+        nzDescription="{{ data.post.title }}"
+        [nzAvatar]="avatarTemplate"
+      ></nz-card-meta>
+    </nz-card>
+    <ng-template #avatarTemplate>
+      <nz-avatar nzSrc=""></nz-avatar>
+    </ng-template>
+    <ng-template #coverTemplate>
+      <img alt="example" src="{{data.post.imageUrl}}" />
+    </ng-template>
+    <ng-template #actionLike>
+    <span>{{ data.like }} </span>
+              <span nz-icon nzType="like" [nzTheme]="'fill'"></span>
+    </ng-template>
+
+
+
+            <td>
+
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
  </div>
 
           </div>
@@ -194,9 +235,70 @@ import { UsersComponent } from '../users/users.component';
   ],
 })
 export class NzDemoLayoutTopComponent {
-post: any;
+
+
 logout() {
 return this.fbA.signOut()
+}
+checked = false;
+loading = false;
+indeterminate = false;
+listOfData: readonly any[] = [];
+listOfCurrentPageData: readonly any[] = [];
+setOfCheckedId = new Set<number>();
+
+constructor(private ps: PostsService, private fbA:FirebaseAuthService, private fbD:FirebaseDbService) {}
+
+updateCheckedSet(id: number, checked: boolean): void {
+  if (checked) {
+    this.setOfCheckedId.add(id);
+  } else {
+    this.setOfCheckedId.delete(id);
+  }
+}
+
+onCurrentPageDataChange(listOfCurrentPageData: readonly any[]): void {
+  this.listOfCurrentPageData = listOfCurrentPageData;
+}
+
+onItemChecked(id: number, checked: boolean): void {
+  this.updateCheckedSet(id, checked);
+}
+
+sendRequest(): void {
+  this.loading = true;
+  const requestData = this.listOfData.filter((data) =>
+    this.setOfCheckedId.has(data.id)
+  );
+  console.log(requestData);
+  setTimeout(() => {
+    this.setOfCheckedId.clear();
+    this.loading = false;
+  }, 500);
+}
+
+sub: Subscription = new Subscription();
+
+ngOnInit(): void {
+  setTimeout(
+    () =>
+      (this.sub = combineLatest(
+        this.ps.getPosts(),
+        //this.ps.getAllFav()
+      ).subscribe(([posts ]) => {
+        let arr: any[] = [];
+
+        posts.forEach((post: any) => {
+          let like = 0;
+       //   like = favs.filter((fav: any) => fav.postId == post.id).length;
+
+          arr.push({ post: post, like: like });
+        });
+
+        this.listOfData = arr;
+      })),
+    2000
+  );
 }
 
   private authSubject = new BehaviorSubject<any>(null);
@@ -208,11 +310,10 @@ return this.fbA.signOut()
 
 
 
-  constructor(private fbA:FirebaseAuthService, private fbD:FirebaseDbService){
 
-    console.log(fbD.database);
 
-}
+
+
 
 
 }

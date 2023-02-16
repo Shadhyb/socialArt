@@ -8,11 +8,10 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
-  GoogleAuthProvider,
-  signInWithRedirect
+
 } from 'firebase/auth';
 import { Router } from '@angular/router';
-import { BehaviorSubject, map, of } from 'rxjs';
+import { BehaviorSubject, map, of, subscribeOn } from 'rxjs';
 
 
 
@@ -45,6 +44,7 @@ export class FirebaseAuthService {
     password: string,
     displayName: string,
 
+
   )
   {
     return createUserWithEmailAndPassword(this.auth, email, password)
@@ -71,17 +71,18 @@ export class FirebaseAuthService {
     signInWithEmailAndPassword(this.auth, data.email, data.password)
     .then((userCredential) => {
       const user = userCredential.user;
+
       console.log(user);
       localStorage.setItem(
         'user',
-        JSON.stringify({
-          displayName: user.displayName,
-          email: user.email,
+        JSON.stringify(
+          {
+            displayName: user.displayName,
+            email: user.email,
+            uid:user.uid,
+
         })
         );
-
-
-
         this.authSubject.next(user);
         this.router.navigate(['/home']);
       })
@@ -114,5 +115,6 @@ export class FirebaseAuthService {
       const user = JSON.parse(userJson);
       this.authSubject.next(user);
     }
+
 
   }

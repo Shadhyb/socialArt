@@ -12,7 +12,8 @@ export const environment = {
     projectId: "bearts-81e0c",
     storageBucket: "bearts-81e0c.appspot.com",
     messagingSenderId: "821035433359",
-    appId: "1:821035433359:web:895689f5fe1ab6d19edffa"
+    appId: "1:821035433359:web:895689f5fe1ab6d19edffa",
+
   }
 
 };

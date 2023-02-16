@@ -12,10 +12,9 @@ import { PostsService } from 'src/app/services/posts.service';
 })
 export class UsersComponent implements OnInit {
 
-  constructor(private fbA:FirebaseAuthService, private ps:PostsService, private fbDb:FirebaseDbService) { }
 
 
-
+  constructor(private ps:PostsService, private fbDb:FirebaseDbService) { }
 
   posts: any;
   usersId: any = [];
@@ -24,28 +23,31 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
     this.sub = combineLatest(
       this.ps.getPosts(),
-      this.ps.getAllFav(),
+
       this.fbDb.get()
-    ).subscribe(([posts, fav, users]) => {
+    ).subscribe(([posts, users]) => {
       this.usersId = Object.keys(users);
+
 
       this.usersId.forEach((user: any) => {
         let postsUser = posts.filter((post: any) => post.userId === user);
         let somm = 0;
 
           postsUser.forEach((post: any) => {
-            let count = fav.filter((fav: any) => fav.postId === post.id).length;
+            let count = user.filter((fav: any) => user.postId === post.id).length;
             somm += count;
           });
           if(somm > 0)this.arr.push({ 'user': users[user], 'like': somm });
       });
       this.arr.sort((a: any, b: any) => b.like - a.like);
     });
+
   }
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
+
 }
 
 
